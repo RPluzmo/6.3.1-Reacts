@@ -34,7 +34,7 @@ function ToDo({ id, task, completed, onDelete, onToggle, onEdit }) {
       <button onClick={() => onDelete(id)}>❌</button>
       {!isEditing && (
         <button onClick={() => {
-          setEditTask(task); // uzstāda pašreizējo vērtību
+          setEditTask(task);
           setIsEditing(true);
         }}>
           🧹
