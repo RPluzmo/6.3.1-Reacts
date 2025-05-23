@@ -13,33 +13,33 @@ function ToDo({ id, task, completed, onDelete, onToggle, onEdit }) {
 
   return (
     <article className="Todo">
-      {isEditing ? (
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            value={editTask}
-            onChange={(e) => setEditTask(e.target.value)}
-          />
-          <button type="submit">Saglabāt</button>
-        </form>
+    	{isEditing ? (
+			<form onSubmit={handleSubmit}>
+				<input
+					type="text"
+					value={editTask}
+					onChange={(e) => setEditTask(e.target.value)}
+				/>
+				<button type="submit">Saglabāt</button>
+			</form>
       ) : (
-        <label>
-          <input
-            type="checkbox"
-            checked={completed}
-            onChange={() => onToggle(id)}
-          />
-          {task}
-        </label>
-      )}
+			<label>
+				<input
+					type="checkbox"
+					checked={completed}
+					onChange={() => onToggle(id)}
+				/>
+			{task}
+			</label>
+			)}
     	<button onClick={() => onDelete(id)}>
-		  ❌
+			❌
 		</button>
       		{!isEditing && (
         <button onClick={() => {setEditTask(task);setIsEditing(true);}}>
         	🧹
         </button>
-      )}
+      		)}
     </article>
   );
 }

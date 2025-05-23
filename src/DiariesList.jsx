@@ -8,7 +8,6 @@ function getLocalDiaries() {
 
 function DiariesList() {
   const [diaries, setDiaries] = useState(getLocalDiaries);
-
   const [newDiary, setNewDiary] = useState({
     title: "",
     body: "",
@@ -61,27 +60,27 @@ function DiariesList() {
 				/>
 			</label>
         <br />
-        <label>
-          Date:
-          <input
-            type="date"
-            value={newDiary.date}
-            onChange={(e) => setNewDiary({ ...newDiary, date: e.target.value })}
-          />
-        </label>
+			<label>
+			Date:
+				<input
+					type="date"
+					value={newDiary.date}
+					onChange={(e) => setNewDiary({ ...newDiary, date: e.target.value })}
+				/>
+			</label>
         <br />
-        <button type="submit">Add Diary</button>
-      </form>
+        	<button type="submit">Add Diary</button>
+    	</form>
 
-      {/* Dienasgrāmatas ieraksti */}
-      {diaries.map((entry) => (
-        <Diary
-          key={entry.id}
-          {...entry}
-          onDelete={handleDelete}
-          onEdit={handleEdit}
-        />
-      ))}
+    	{/* Dienasgrāmatas ieraksti */}
+    	{diaries.map((entry) => (
+			<Diary
+				key={entry.id}
+				{...entry}
+				onDelete={handleDelete}
+				onEdit={handleEdit}
+			/>
+    	))}
     </article>
   );
 }
