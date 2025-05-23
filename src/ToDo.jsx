@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import "./ToDo.css";
 
 function ToDo({ id, task, completed, onDelete, onToggle, onEdit }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -11,7 +12,7 @@ function ToDo({ id, task, completed, onDelete, onToggle, onEdit }) {
   }
 
   return (
-    <article>
+    <article className="Todo">
       {isEditing ? (
         <form onSubmit={handleSubmit}>
           <input
@@ -31,13 +32,12 @@ function ToDo({ id, task, completed, onDelete, onToggle, onEdit }) {
           {task}
         </label>
       )}
-      <button onClick={() => onDelete(id)}>❌</button>
-      {!isEditing && (
-        <button onClick={() => {
-          setEditTask(task);
-          setIsEditing(true);
-        }}>
-          🧹
+    	<button onClick={() => onDelete(id)}>
+		  ❌
+		</button>
+      		{!isEditing && (
+        <button onClick={() => {setEditTask(task);setIsEditing(true);}}>
+        	🧹
         </button>
       )}
     </article>

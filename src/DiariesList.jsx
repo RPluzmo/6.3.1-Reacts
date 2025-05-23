@@ -1,33 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Diary from "./Diary";
 
+function getLocalDiaries() {
+	const stored = localStorage.getItem("diaries");
+	return stored ? JSON.parse(stored) : [];
+  }
+
 function DiariesList() {
-  const [diaries, setDiaries] = useState([
-    {
-      id: 1,
-      title: "Bombardino",
-      body: "E-klase",
-      date: "2025-05-19",
-    },
-    {
-      id: 2,
-      title: "Krokadilo",
-      body: "Voulez VOUUS",
-      date: "2025-05-20",
-    },
-    {
-      id: 3,
-      title: "Uzdevums dienasgrāmata",
-      body: "carbon dioxide",
-      date: "2025-05-22",
-    },
-  ]);
+  const [diaries, setDiaries] = useState(getLocalDiaries);
 
   const [newDiary, setNewDiary] = useState({
     title: "",
     body: "",
     date: "",
   });
+
+  useEffect(() => {
+	localStorage.setItem("diaries", JSON.stringify(diaries));
+  }, [diaries]);
 
   function handleAdd(event) {
     event.preventDefault();
@@ -52,25 +42,24 @@ function DiariesList() {
   }
 
   return (
-    <div>
-      {/* Dienasgrāmatas pievienošanas forma */}
-      <form onSubmit={handleAdd}>
-        <label>
-          Title:
-          <input
-            type="text"
-            value={newDiary.title}
-            onChange={(e) => setNewDiary({ ...newDiary, title: e.target.value })}
-          />
-        </label>
+    <article>
+    	<form onSubmit={handleAdd}>
+        	<label>
+				Title:
+				<input
+					type="text"
+					value={newDiary.title}
+					onChange={(e) => setNewDiary({ ...newDiary, title: e.target.value })}
+				/>
+        	</label>
         <br />
-        <label>
-          Body:
-          <textarea
-            value={newDiary.body}
-            onChange={(e) => setNewDiary({ ...newDiary, body: e.target.value })}
-          />
-        </label>
+			<label>
+				Body:
+				<textarea
+					value={newDiary.body}
+					onChange={(e) => setNewDiary({ ...newDiary, body: e.target.value })}
+				/>
+			</label>
         <br />
         <label>
           Date:
@@ -93,7 +82,7 @@ function DiariesList() {
           onEdit={handleEdit}
         />
       ))}
-    </div>
+    </article>
   );
 }
 
